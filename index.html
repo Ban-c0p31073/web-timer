@@ -1,0 +1,63 @@
+<html lang="ja">
+
+  <head>
+   <title>Timer</title>
+   <meta charset="utf-8">
+   <link rel="stylesheet" href="styles.css">
+   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&amp;display=swap" rel="stylesheet">
+ </head>
+
+ <body>
+ 
+   <div id="app" :style="styles" @mouseover="hover('over')" @mouseleave="hover('leave')">
+      <transition name="slide">
+        <header v-show="hoverShow">
+          <h1>Timer</h1>
+        </header>
+      </transition>
+      <div id="timeEdit">
+        <transition name="fade">
+          <div id="editContainer" v-show="!show">
+            <div>
+              <div class="updown" @mousedown="updown('+h')" @mouseup="updown('stop')" @mouseout="updown('stop')">+</div>
+              <input  v-model.number="setHour" type="number" :placeholder="setHour" maxlength="1" @focus="editFocus" @input="validation">
+              <p>時間</p>
+              <div class="updown" @mousedown="updown('-h')"  @mouseup="updown('stop')" @mouseout="updown('stop')">-</div>
+            </div>
+            <div>
+              <div class="updown" @mousedown="updown('+m')" @mouseup="updown('stop')" @mouseout="updown('stop')">+</div>
+              <input v-model.number="setMin" type="number" :placeholder="setMin" maxlength="2" @focus="editFocus" @input="validation">
+              <p>分</p>
+              <div class="updown" @mousedown="updown('-m')"  @mouseup="updown('stop')" @mouseout="updown('stop')">-</div>
+            </div>
+            <div>
+              <div class="updown" @mousedown="updown('+s')"  @mouseup="updown('stop')" @mouseout="updown('stop')">+</div>
+              <input v-model.number="setSec" type="number" :placeholder="setSec" maxlength="2" @focus="editFocus" @input="validation">
+              <p>秒</p>
+              <div class="updown" @mousedown="updown('-s')"  @mouseup="updown('stop')" @mouseout="updown('stop')">-</div>
+            </div>
+          </div>
+        </transition>
+        <transition name="fade">
+          <p id="time" v-show="show">{{timerHour}}{{timerMin}}:{{timerSec}}</p>
+        </transition>
+      </div>
+      <transition name="slide">
+        <div id="btnGroup" v-show="hoverShow">
+          <div @click="timer">
+            <p>{{btn}}</p>
+          </div>
+          <div @click="cancel">
+            <p>Reset</p>
+          </div>
+        </div>
+      </transition>
+      <div id="overray" v-show="show"></div>
+    </div>
+ 
+   <script src="app.js"></script>
+ 
+ </body></html>
