@@ -1,5 +1,4 @@
 <html lang="ja">
-
   <head>
    <title>Timer</title>
    <meta charset="utf-8">
@@ -20,29 +19,41 @@
       </transition>
       <div id="timeEdit">
         <transition name="fade">
-          <div id="editContainer" v-show="!show">
+          <div id="editContainer" v-show="!timerShow">
             <div>
-              <div class="updown" @mousedown="updown('+h')" @mouseup="updown('stop')" @mouseout="updown('stop')">+</div>
+              <transition name="fade">
+                <div class="updown" @mousedown="updown('+h')" @mouseup="updown('stop')" @mouseout="updown('stop')" v-show="hoverShow">+</div>
+              </transition>
               <input  v-model.number="setHour" type="number" :placeholder="setHour" maxlength="1" @focus="editFocus" @input="validation">
               <p>時間</p>
-              <div class="updown" @mousedown="updown('-h')"  @mouseup="updown('stop')" @mouseout="updown('stop')">-</div>
+              <transition name="fade">
+                <div class="updown" @mousedown="updown('-h')"  @mouseup="updown('stop')" @mouseout="updown('stop')" v-show="hoverShow">-</div>
+              </transition>
             </div>
             <div>
-              <div class="updown" @mousedown="updown('+m')" @mouseup="updown('stop')" @mouseout="updown('stop')">+</div>
+              <transition name="fade">
+                <div class="updown" @mousedown="updown('+m')" @mouseup="updown('stop')" @mouseout="updown('stop')" v-show="hoverShow">+</div>
+              </transition>
               <input v-model.number="setMin" type="number" :placeholder="setMin" maxlength="2" @focus="editFocus" @input="validation">
               <p>分</p>
-              <div class="updown" @mousedown="updown('-m')"  @mouseup="updown('stop')" @mouseout="updown('stop')">-</div>
+              <transition name="fade">
+                <div class="updown" @mousedown="updown('-m')"  @mouseup="updown('stop')" @mouseout="updown('stop')" v-show="hoverShow">-</div>
+              </transition>
             </div>
             <div>
-              <div class="updown" @mousedown="updown('+s')"  @mouseup="updown('stop')" @mouseout="updown('stop')">+</div>
+              <transition name="fade">
+                <div class="updown" @mousedown="updown('+s')"  @mouseup="updown('stop')" @mouseout="updown('stop')" v-show="hoverShow">+</div>
+              </transition>
               <input v-model.number="setSec" type="number" :placeholder="setSec" maxlength="2" @focus="editFocus" @input="validation">
               <p>秒</p>
-              <div class="updown" @mousedown="updown('-s')"  @mouseup="updown('stop')" @mouseout="updown('stop')">-</div>
+              <transition name="fade">
+                <div class="updown" @mousedown="updown('-s')"  @mouseup="updown('stop')" @mouseout="updown('stop')" v-show="hoverShow">-</div>
+              </transition>
             </div>
           </div>
         </transition>
         <transition name="fade">
-          <p id="time" v-show="show">{{timerHour}}{{timerMin}}:{{timerSec}}</p>
+          <p id="time" v-show="timerShow">{{timerHour}}{{timerMin}}:{{timerSec}}</p>
         </transition>
       </div>
       <transition name="slide">
@@ -55,9 +66,10 @@
           </div>
         </div>
       </transition>
-      <div id="overray" v-show="show"></div>
+      <div id="overray" v-show="timerShow"></div>
     </div>
  
    <script src="app.js"></script>
  
- </body></html>
+ </body>
+ </html>

@@ -10,7 +10,7 @@
       setMin:1,
       setSec:0,
       longClick:null,
-      show:false,
+      timerShow:false,
       hoverShow:true,
       vh:(window.innerHeight * 0.01),
     },
@@ -24,12 +24,12 @@
         }
       },
       timer(){
-        if(this.show == false){
+        if(this.timerShow == false){
           this.time = (this.setHour*60*60)+(this.setMin*60)+this.setSec;
           this.timeMax = this.time;
         }
         if(this.timerOn == false && this.time != 0){
-          this.show = true;
+          this.timerShow = true;
           this.timerOn = true;
           this.setTimer = setInterval(this.count_down, 1000);
         }else{
@@ -38,7 +38,7 @@
         }
       },
       cancel(){
-        this.show = false;
+        this.timerShow = false;
         this.timerOn = false;
         clearInterval(this.setTimer);
         document.title = "Timer";
@@ -90,7 +90,7 @@
       },
       hover(e){
         if(e == "over") this.hoverShow = true;
-        if(e == "leave" && this.timerOn == true) this.hoverShow = false;
+        if(e == "leave") this.hoverShow = false;
       }
     },
     computed:{
